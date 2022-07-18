@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-
+// ****************************************Create a new class which holds data,next node address*************************************
 class node{
     public:
     int data;
@@ -10,6 +10,10 @@ class node{
         next=NULL;
     }
 };
+
+// ****************************************Insert At Tail*************************************
+
+
 void insertAtTail(node* &head,int val){
     node* n= new node(val);
     if(head==NULL){
@@ -22,9 +26,17 @@ void insertAtTail(node* &head,int val){
     }
     temp->next=n;
 }
+
+// ****************************************Delete At Head*************************************
+
+
 void deleteAthead(node* &head){
     head=head->next;
 }
+
+// ****************************************Delete At end *************************************
+
+
 void deleteAtend(node* &head){
     node* temp=head;
     while(temp->next->next!=NULL){
@@ -32,6 +44,10 @@ void deleteAtend(node* &head){
     }
     temp->next=NULL;
 };
+
+// ****************************************Delete Specified Key*************************************
+
+
 void deletekey(node* &head,int key){
     node* temp=head;
     while(temp->next->data!=key){
@@ -39,6 +55,9 @@ void deletekey(node* &head,int key){
     }
     temp->next=temp->next->next;
 }
+
+// ****************************************Delete Give At specific Index*************************************
+
 
 
 void deleteKeyAtGivenIndex(node* head,int position){
@@ -49,6 +68,10 @@ void deleteKeyAtGivenIndex(node* head,int position){
     }
     temp->next=temp->next->next;
 }
+
+// ****************************************Length*************************************
+
+
 int length(node* head ){
     int c=0;
     node* temp=head;
@@ -59,6 +82,10 @@ int length(node* head ){
    cout<< c<<endl;
    return 0;
 }
+
+// ****************************************Searching Of Element*************************************
+
+
 void searchForElement(node* head,int key){
     node* temp=head;
     while(temp!=NULL){
@@ -71,6 +98,10 @@ void searchForElement(node* head,int key){
 
     }
 }
+
+// ****************************************Nth node*************************************
+
+
 void nthnode(node* head,int n){
     node* temp=head;
     int c=0;
@@ -84,15 +115,20 @@ void nthnode(node* head,int n){
        
     }
 }
-int forReturninglength(node* head ){
-    int c=0;
-    node* temp=head;
-    while(temp!=NULL){
-        c++;
-        temp=temp->next;
-    }
-   return c;
-}
+
+// int forReturninglength(node* head ){
+//     int c=0;
+//     node* temp=head;
+//     while(temp!=NULL){
+//         c++;
+//         temp=temp->next;
+//     }
+//    return c;
+// }
+
+// ****************************************Nth node From end*************************************
+
+
 void nthnodefromend(node* head,int n){
     node* temp=head;
     int c=0;
@@ -107,6 +143,10 @@ void nthnodefromend(node* head,int n){
        
     }
 }
+
+// ****************************************COunt*************************************
+
+
 int  count(node* head,int val){
     node* temp=head;
     int c=0;
@@ -118,7 +158,106 @@ int  count(node* head,int val){
         temp=temp->next;
     }
     cout<<c<<endl;
+    return 0;
 }
+
+// ****************************************Reverse*************************************
+
+
+node* reverse(node* &head){
+    node* prevptr=NULL;
+    node* currptr=head;
+    node* nextptr;
+    while(currptr!=NULL){
+        nextptr=currptr->next;
+        currptr->next=prevptr;
+
+        prevptr=currptr;
+        currptr=nextptr;
+    }
+    return prevptr;
+}
+
+// ****************************************Reverseknodes*************************************
+
+
+node* reverseknodes(node* &head,int k){
+    node* prevptr=NULL;
+    node* currptr=head;
+    node* nextptr;
+    int count=0;
+    while(currptr!=NULL && count<k){
+        nextptr=currptr->next;
+        currptr->next=prevptr;
+
+        prevptr=currptr;
+        currptr=nextptr;
+        count++;
+    }
+    if(nextptr!=NULL){
+        head->next=reverseknodes(nextptr,k);
+    }
+
+    return prevptr;
+}
+
+// ****************************************Detect Cycle*************************************
+
+
+bool detectCycle(node* &head){
+    node* slow=head;
+    node* fast=head;
+    while(fast!=NULL && fast->next!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+        if(fast==slow){
+           return true;
+        }
+    }
+    return false;
+}
+
+// ****************************************Make_Cycle*************************************
+
+
+void makeCycle(node* &head,int pos){
+    node* temp=head;
+    node* startnode;
+    int count=1;
+    while(temp->next!=NULL){
+        if(count==pos){
+            startnode=temp; 
+        }
+        temp=temp->next;
+        count++;
+    }
+    temp->next=startnode;
+}
+
+// ****************************************Delete_CyCle*************************************
+
+
+void deleteCycle(node* head){
+    node* slow=head;
+    node* fast=head;
+    do
+    {
+        slow=slow->next;
+        fast=fast->next->next;
+    } while (slow!=fast);
+    fast=head;
+    while(slow->next!=fast->next){
+        slow=slow->next;
+        fast=fast->next;
+    }
+    slow->next=NULL;
+    
+}
+
+
+// ****************************************Display*************************************
+
+
 
 void display(node* head){
     node* temp=head;
@@ -126,35 +265,46 @@ void display(node* head){
         cout<<temp->data<<"->";
         temp=temp->next;
     }
-    cout<<endl;
+    cout<<"NULL"<<endl;
 }
 
 int main(){
     node* head=NULL;
-    insertAtTail(head,1);
-    insertAtTail(head,-3);
-    insertAtTail(head,8);
-    insertAtTail(head,79);
-    insertAtTail(head,84);
+    insertAtTail(head,-1);
     insertAtTail(head,0);
-    insertAtTail(head,44);
-    insertAtTail(head,644);
+    insertAtTail(head,1);
+    insertAtTail(head,0);
+    insertAtTail(head,2);
+    insertAtTail(head,3);
+    insertAtTail(head,4);
+    insertAtTail(head,5);
+    insertAtTail(head,6);
+    insertAtTail(head,7);
     length(head);
     display(head);
-    deletekey(head,8);
+    deletekey(head,4);
     length(head);
     display(head);
-    insertAtTail(head,22);
+    insertAtTail(head,8);
     length(head);
     display(head);
     deleteKeyAtGivenIndex(head,3);
     length(head);
     display(head);
-    searchForElement(head,19);  
+    searchForElement(head,6);  
     nthnode(head,3);
     nthnodefromend(head,2);
-    count(head,22);
-
+    count(head,1);
+    node* newhead=reverse(head);
+    display(newhead);
+    int k=2;
+    node* newhead1=reverseknodes(newhead,k );
+    display(newhead1);
+    cout<<detectCycle(newhead1)<<endl;
+    makeCycle(newhead1,2);
+    cout<<detectCycle(newhead1)<<endl;
+    deleteCycle(newhead);
+    cout<<detectCycle(newhead1)<<endl;
 
 
 };
