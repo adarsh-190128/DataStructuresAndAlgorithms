@@ -116,15 +116,15 @@ void nthnode(node* head,int n){
     }
 }
 
-// int forReturninglength(node* head ){
-//     int c=0;
-//     node* temp=head;
-//     while(temp!=NULL){
-//         c++;
-//         temp=temp->next;
-//     }
-//    return c;
-// }
+int forReturninglength(node* head ){
+    int c=0;
+    node* temp=head;
+    while(temp!=NULL){
+        c++;
+        temp=temp->next;
+    }
+   return c;
+}
 
 // ****************************************Nth node From end*************************************
 
@@ -254,7 +254,26 @@ void deleteCycle(node* head){
     
 }
 
+// ****************************************Appending Last K nOdes to start of Linked List*************************************
 
+
+void AppendLastKNodesToStartOfLinkedList(node* &head,int k){
+    int l=forReturninglength(head);
+    int pos=l-k;
+    node* temp=head;
+    node* newhead;
+    int count=1;
+    while(temp!=NULL){
+        if(count==pos){
+            newhead=temp;
+        }
+        temp=temp->next;
+        count++;
+
+
+    }
+    temp->next=head;
+}
 // ****************************************Display*************************************
 
 
@@ -305,46 +324,10 @@ int main(){
     cout<<detectCycle(newhead1)<<endl;
     deleteCycle(newhead);
     cout<<detectCycle(newhead1)<<endl;
+    AppendLastKNodesToStartOfLinkedList(newhead1,2);
+    display(newhead1);
 
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
